@@ -1,9 +1,10 @@
-### Node.js based chat prompt
+## Prompt
 
-Just some random programming exercise. I came up with this while
-feedling with [websocketd](http://websocketd.com/)
+> Just some random programming exercise. I came up with this while
+fiddling around with [websocketd](http://websocketd.com/)
 
-> What it looks like:
 ![prompt](./prompt.gif)
+
+&nbsp;
 
 Cheers!
