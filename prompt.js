@@ -22,6 +22,15 @@ SOFTWARE.
 */
 
 'use strict';
+// Each message should be formatted as follow:
+//
+// {
+//   timestamp: Date.now() / 10000,
+//   message: String(''),
+//   username: String('')
+// }
+//
+// Pretty basic ey?
 const messages = [];
 
 /****************************************************************************
@@ -48,22 +57,24 @@ const draw = (msg) => {
 
       // Get the message in reverse without mutating
       // the messages array
-      const msg = Array
+      const item = Array
         .from(messages)
         .reverse()[index];
 
       // Timestamped message
-      const tmsg = `[${new Date().toLocaleTimeString()}] ${msg}`;
-
-      // Write to standard out
-      if (msg !== -1 && msg !== undefined) console.log(tmsg);
-      else console.log(filler);
+      if (item && item  !== -1) {
+        const tt = (new Date(item.timestamp)).toLocaleTimeString();
+        return console.log(`[${tt}][${item.user}] ${item.message}`);
+      } else {
+        // Write to standard out
+        console.log(filler);
+      }
     });
 
   process.stdout.write('\r[~] ');
 }
 
-// paint it!
+// Draw
 draw();
 
 // read user inputs
@@ -77,6 +88,13 @@ process.stdin.on('data', (d) => {
   // On quit
   if (tm.match(/^\/(quit|close|exit)/i)) process.exit(1);
 
-  messages.push(tm);
+  // Insert
+  messages.push({
+    timestamp: Date.now(),
+    message: tm,
+    user: 'Me'
+  });
+
+  // Re-draw
   draw();
 });
